@@ -22,12 +22,7 @@ function substr_remove(&$string, $start, $length = null)
     }
     else {
         $substr = substr($string, $start, $length);
-        if ($length >= 0) {
-            $string = substr($string, 0, $start) . substr($string, $start + $length);
-        }
-        else {
-            $string = substr($string, 0, $start) . substr($string, $length);
-        }
+        $string = substr_replace($string, '', $start, $length);
     }
     return $substr;
 }
