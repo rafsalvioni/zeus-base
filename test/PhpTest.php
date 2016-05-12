@@ -14,7 +14,7 @@ class PhpTest extends \PHPUnit_Framework_TestCase
     public function constsTest()
     {
         $this->assertTrue(
-            \PHP_X64 === \is_int(\PHP_INT_MAX + 1) &&
+            \PHP_X64 === ((1 << 32) != 1) &&
             \PHP_ON_WEB === isset($_SERVER['REMOTE_ADDR'])
         );
     }

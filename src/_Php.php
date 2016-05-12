@@ -20,7 +20,7 @@ define('PHP_ON_WEB',
  * 
  * @const bool
  */
-define('PHP_X64', \is_int(\PHP_INT_MAX + 1));
+define('PHP_X64', \PHP_INT_SIZE == 8);
 
 /**
  * Informs if a any output buffer active.
