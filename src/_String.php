@@ -26,3 +26,35 @@ function substr_remove(&$string, $start, $length = null)
     }
     return $substr;
 }
+
+/**
+ * Applies a mask to a string using the "#" as wildcard.
+ * 
+ * Ex.: mask('###.###.###-##', '12345678900') => '123.456.789-00'
+ * 
+ * To escape a #, use "\".
+ * 
+ * @param  string $mask
+ * @param  string $string
+ * @return string
+ */
+function mask($mask, $string)
+{
+    $string = str_split($string);
+    $return = '';
+    
+    while (!empty($mask) && !empty($string) && preg_match('/^(\\\*)(.?)/', $mask, $match)) {
+        $escape = (\strlen($match[1]) % 2) > 0;
+        $part   = '';
+        if (!$escape && $match[2] == '#') {
+            $part = array_shift($string);
+        }
+        else {
+            $part = $match[2];
+        }
+        $part    = stripslashes($match[1]) . $part;
+        $mask    = substr_replace($mask, '', 0, \strlen($match[0]));
+        $return .= $part;
+    }
+    return $return;
+}

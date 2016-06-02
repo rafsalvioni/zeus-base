@@ -31,4 +31,14 @@ class StringTest extends \PHPUnit_Framework_TestCase
         $string = __FUNCTION__;
         $this->assertTrue(\substr_remove($string, -3, -2) == 'e' && $string == 'substrRemoveTst');
     }
+    
+    /**
+     * @test
+     */
+    public function maskTest()
+    {
+        $this->assertEquals(\mask('###.###.###-##', '12345678900'), '123.456.789-00');
+        $this->assertEquals(\mask('###.###.##\##-##', '12345678900'), '123.456.78#9-00');
+        $this->assertEquals(\mask('##.###.###-##', '12345678900'), '12.345.678-90');
+    }
 }
