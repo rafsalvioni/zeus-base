@@ -2,6 +2,10 @@
 
 namespace ZeusTest\Base;
 
+use function Zeus\Base\Arrays\is_assoc;
+use function Zeus\Base\Arrays\queue;
+use function Zeus\Base\Arrays\last;
+
 /**
  * 
  * @author Rafael M. Salvioni
@@ -14,10 +18,10 @@ class ArrayTest extends \PHPUnit_Framework_TestCase
     public function arrayAssocTest()
     {
         $array = \range(0, 10);
-        $true  = !\array_is_assoc($array);
+        $true  = is_assoc($array);
         unset($array[3]);
-        $true  = $true && \array_is_assoc($array);
-        $true  = $true && \array_is_assoc($GLOBALS);
+        $true  = $true && is_assoc($array);
+        $true  = $true && is_assoc($GLOBALS);
         $this->assertTrue($true);
     }
     
@@ -26,10 +30,10 @@ class ArrayTest extends \PHPUnit_Framework_TestCase
      */
     public function arrayQueueTest()
     {
-        $array = range(0, 9);
+        $array = \range(0, 9);
         $sum   = 0;
         $i     = 0;
-        while (\array_queue($array, $val)) {
+        while (queue($array, $val)) {
             $sum += $val;
             $i++;
             if ($i > 10) {
@@ -43,28 +47,12 @@ class ArrayTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function arrayGetTest()
-    {
-        $array    = range(0, 9);
-        $array2   = $array;
-        $array2[] = $array;
-        $this->assertTrue(
-            \array_get($array, 2) === 2 &&
-            \array_get($array, 11) === null &&
-            \array_get($array2, "10.2") === 2 &&
-            \array_get($array2, [10, 3]) === 3
-        );
-    }
-    
-    /**
-     * @test
-     */
     public function arrayLastTest()
     {
-        $array = range(0, 9);
+        $array = \range(0, 9);
         $this->assertTrue(
-            \array_last($array) === 9 &&
-            \array_last([]) === null
+            last($array) === 9 &&
+            last([]) === null
         );
     }
 }

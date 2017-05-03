@@ -5,23 +5,7 @@
  * @author Rafael M. Salvioni
  */
 
-/**
- * Receives many arguments and returns the first not null.
- *
- * @param mixed $value
- * @return mixed
- */
-function coalesce($value)
-{
-    $args = func_get_args();
-    while (!empty($args)) {
-        $value = array_shift($args);
-        if (!is_null($value)) {
-            return $value;
-        }
-    }
-    return null;
-}
+namespace Zeus\Base\Vars;
 
 /**
  * Dumps a value and return it string.
@@ -29,10 +13,10 @@ function coalesce($value)
  * @param mixed $value
  * @return string
  */
-function dump($value)
+function dump($value): string
 {
-    ob_start();
-    var_dump($value);
+    \ob_start();
+    \var_dump($value);
     return ob_get_end();
 }
 
@@ -44,7 +28,7 @@ function dump($value)
  * @param mixed $var
  * @return bool
  */
-function is_composite($var)
+function is_composite($var): bool
 {
     return \is_array($var) || \is_object($var);
 }
@@ -55,7 +39,7 @@ function is_composite($var)
  * @param mixed $var
  * @return bool
  */
-function is_number($var)
+function is_number($var): bool
 {
     return \is_int($var) || \is_float($var);
 }

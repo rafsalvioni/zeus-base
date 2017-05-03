@@ -2,6 +2,8 @@
 
 namespace ZeusTest\Base;
 
+use Zeus\Base\String;
+
 /**
  * 
  * @author Rafael M. Salvioni
@@ -14,22 +16,22 @@ class StringTest extends \PHPUnit_Framework_TestCase
     public function substrRemoveTest()
     {
         $string = __FUNCTION__;
-        $this->assertTrue(\substr_remove($string, 2) == 'bstrRemoveTest' && $string == 'su');
+        $this->assertTrue(String\substr_remove($string, 2) == 'bstrRemoveTest' && $string == 'su');
         
         $string = __FUNCTION__;
-        $this->assertTrue(\substr_remove($string, 0, 3) == 'sub' && $string == 'strRemoveTest');
+        $this->assertTrue(String\substr_remove($string, 0, 3) == 'sub' && $string == 'strRemoveTest');
         
         $string = __FUNCTION__;
-        $this->assertTrue(\substr_remove($string, 3, 4) == 'strR' && $string == 'subemoveTest');
+        $this->assertTrue(String\substr_remove($string, 3, 4) == 'strR' && $string == 'subemoveTest');
         
         $string = __FUNCTION__;
-        $this->assertTrue(\substr_remove($string, -3) == 'est' && $string == 'substrRemoveT');
+        $this->assertTrue(String\substr_remove($string, -3) == 'est' && $string == 'substrRemoveT');
         
         $string = __FUNCTION__;
-        $this->assertTrue(\substr_remove($string, 5, -2) == 'rRemoveTe' && $string == 'substst');
+        $this->assertTrue(String\substr_remove($string, 5, -2) == 'rRemoveTe' && $string == 'substst');
         
         $string = __FUNCTION__;
-        $this->assertTrue(\substr_remove($string, -3, -2) == 'e' && $string == 'substrRemoveTst');
+        $this->assertTrue(String\substr_remove($string, -3, -2) == 'e' && $string == 'substrRemoveTst');
     }
     
     /**
@@ -37,8 +39,8 @@ class StringTest extends \PHPUnit_Framework_TestCase
      */
     public function maskTest()
     {
-        $this->assertEquals(\mask('###.###.###-##', '12345678900'), '123.456.789-00');
-        $this->assertEquals(\mask('###.###.##\##-##', '12345678900'), '123.456.78#9-00');
-        $this->assertEquals(\mask('##.###.###-##', '12345678900'), '12.345.678-90');
+        $this->assertEquals(String\mask('###.###.###-##', '12345678900'), '123.456.789-00');
+        $this->assertEquals(String\mask('###.###.##\##-##', '12345678900'), '123.456.78#9-00');
+        $this->assertEquals(String\mask('##.###.###-##', '12345678900'), '12.345.678-90');
     }
 }
