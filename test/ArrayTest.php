@@ -2,10 +2,6 @@
 
 namespace ZeusTest\Base;
 
-use function Zeus\Base\Arrays\is_assoc;
-use function Zeus\Base\Arrays\queue;
-use function Zeus\Base\Arrays\last;
-
 /**
  * 
  * @author Rafael M. Salvioni
@@ -18,10 +14,10 @@ class ArrayTest extends \PHPUnit_Framework_TestCase
     public function arrayAssocTest()
     {
         $array = \range(0, 10);
-        $true  = is_assoc($array);
+        $true  = !\array_is_assoc($array);
         unset($array[3]);
-        $true  = $true && is_assoc($array);
-        $true  = $true && is_assoc($GLOBALS);
+        $true  = $true && \array_is_assoc($array);
+        $true  = $true && \array_is_assoc($GLOBALS);
         $this->assertTrue($true);
     }
     
@@ -33,7 +29,7 @@ class ArrayTest extends \PHPUnit_Framework_TestCase
         $array = \range(0, 9);
         $sum   = 0;
         $i     = 0;
-        while (queue($array, $val)) {
+        while (\array_queue($array, $val)) {
             $sum += $val;
             $i++;
             if ($i > 10) {
@@ -51,8 +47,9 @@ class ArrayTest extends \PHPUnit_Framework_TestCase
     {
         $array = \range(0, 9);
         $this->assertTrue(
-            last($array) === 9 &&
-            last([]) === null
+            \array_last($array) === 9 &&
+            \array_last([]) === null &&
+            \count($array) == 10
         );
     }
 }

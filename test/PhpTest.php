@@ -2,8 +2,6 @@
 
 namespace ZeusTest\Base;
 
-use Zeus\Base\Php;
-
 /**
  * 
  * @author Rafael M. Salvioni
@@ -16,8 +14,8 @@ class PhpTest extends \PHPUnit_Framework_TestCase
     public function constsTest()
     {
         $this->assertTrue(
-            PHP\X64 === ((1 << 32) != 1) &&
-            PHP\ON_WEB === isset($_SERVER['REMOTE_ADDR'])
+            PHP_X64 === (PHP_INT_SIZE == 8) &&
+            PHP_ON_WEB === isset($_SERVER['REMOTE_ADDR'])
         );
     }
     
@@ -30,7 +28,7 @@ class PhpTest extends \PHPUnit_Framework_TestCase
         $init = \ob_get_level();
         do {
             $level  = \ob_get_level();
-            $active = Php\ob_active() ^ $level > 0;
+            $active = \ob_active() ^ $level > 0;
             if ($active) {
                 $this->assertTrue(false);
                 return;
@@ -54,7 +52,7 @@ class PhpTest extends \PHPUnit_Framework_TestCase
         $n = \ob_get_level();
         echo __CLASS__;
         $this->assertTrue(
-            PHP\ob_get_end() === __CLASS__ &&
+            \ob_get_end() === __CLASS__ &&
             $n > \ob_get_level()
         );
     }

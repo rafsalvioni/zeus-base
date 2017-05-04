@@ -5,23 +5,15 @@
  * @author Rafael M. Salvioni
  */
 
-namespace Zeus\Base\Arrays;
-
 /**
  * Checks if a array is associative.
  *
  * @param array $array Array
  * @return bool
  */
-function is_assoc(array $array): bool
+function array_is_assoc(array $array): bool
 {
-    $keys = \array_keys($array);
-    foreach ($keys as $idx => &$key) {
-        if ($idx !== $key) {
-            return true;
-        }
-    }
-    return false;
+    return array_values($array) !== $array;
 }
 
 /**
@@ -33,10 +25,10 @@ function is_assoc(array $array): bool
  * @param mixed $value
  * @return bool
  */
-function queue(array &$array, &$value): bool
+function array_queue(array &$array, &$value): bool
 {
     if (!empty($array)) {
-        $value = \array_shift($array);
+        $value = array_shift($array);
         return true;
     }
     $value = null;
@@ -49,7 +41,7 @@ function queue(array &$array, &$value): bool
  * @param array $array
  * @return mixed
  */
-function last(array $array)
+function array_last(array $array)
 {
-    return \array_pop($array);
+    return array_pop($array);
 }

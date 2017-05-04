@@ -5,8 +5,6 @@
  * @author Rafael M. Salvioni
  */
 
-namespace Zeus\Base\Vars;
-
 /**
  * Dumps a value and return it string.
  *
@@ -15,22 +13,9 @@ namespace Zeus\Base\Vars;
  */
 function dump($value): string
 {
-    \ob_start();
-    \var_dump($value);
+    ob_start();
+    var_dump($value);
     return ob_get_end();
-}
-
-/**
- * Checks if a value is composite.
- * 
- * Are considered composite values arrays and objects.
- * 
- * @param mixed $var
- * @return bool
- */
-function is_composite($var): bool
-{
-    return \is_array($var) || \is_object($var);
 }
 
 /**
@@ -41,7 +26,7 @@ function is_composite($var): bool
  */
 function is_number($var): bool
 {
-    return \is_int($var) || \is_float($var);
+    return is_int($var) || is_float($var);
 }
 
 /**
@@ -50,12 +35,12 @@ function is_number($var): bool
  * @param string $class Class name
  * @return object
  */
-function create_instance($class)
+function create_instance(string $class)
 {
-    return \unserialize(
-        \sprintf(
+    return unserialize(
+        sprintf(
             'O:%d:"%s":0:{}',
-            \strlen($class),
+            strlen($class),
             $class
         )
     );
