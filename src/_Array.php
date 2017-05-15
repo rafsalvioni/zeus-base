@@ -47,6 +47,7 @@ function array_queue(array &$array, &$value)
  * @param string|Integer|array $key Chave
  * @param mixed $defaultValue Valor padrão
  * @return mixed
+ * @deprecated PHP 7.0 Use ?? operator
  */
 function array_get(array $array, $key, $defaultValue = null)
 {

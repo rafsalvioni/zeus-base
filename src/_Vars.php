@@ -10,6 +10,7 @@
  *
  * @param mixed $value
  * @return mixed
+ * @deprecated PHP 7.0 Use ?? operator
  */
 function coalesce($value)
 {
