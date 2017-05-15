@@ -37,19 +37,6 @@ function dump($value)
 }
 
 /**
- * Checks if a value is composite.
- * 
- * Are considered composite values arrays and objects.
- * 
- * @param mixed $var
- * @return bool
- */
-function is_composite($var)
-{
-    return \is_array($var) || \is_object($var);
-}
-
-/**
  * Checks is a value is a number, integer or double.
  * 
  * @param mixed $var

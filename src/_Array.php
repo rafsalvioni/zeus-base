@@ -13,13 +13,7 @@
  */
 function array_is_assoc(array $array)
 {
-    $keys = \array_keys($array);
-    foreach ($keys as $idx => &$key) {
-        if ($idx !== $key) {
-            return true;
-        }
-    }
-    return false;
+    return array_values($array) !== $array;
 }
 
 /**
@@ -83,7 +77,5 @@ function array_get(array $array, $key, $defaultValue = null)
  */
 function array_last(array $array)
 {
-    $array = \array_values($array);
-    $n     = \count($array);
-    return $n > 0 ? $array[$n - 1] : null;
+    return array_pop($array);
 }
