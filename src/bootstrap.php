@@ -67,17 +67,15 @@ $h = set_exception_handler(function(Exception $e)
 
     // If html_errors is on, format the message
     if (PHP_ON_WEB) {
-        $headers = headers_sent();
-        if (ini_get('html_errors')) {
+        $html = ini_get('html_errors');
+        if ($html) {
             $message = '
 <div style="border: solid 1px #FF0000; background-color: #FFEFEF; display: block; width: 100%; font: bold 15 Verdana,Arial">
 <pre>' . $message . '</pre></div>';
         }
-        else if ($headers) {
-            header('Content-Type: text/plain');
-        }
-        if ($headers) {
+        if (!headers_sent()) {
             header('HTTP/1.1 500');
+            header('Content-Type: text/' . $html ? 'html' : 'plain');
         }
     }
     else {
