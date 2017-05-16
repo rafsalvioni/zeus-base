@@ -87,5 +87,3 @@ $h = set_exception_handler(function(Exception $e)
 if ($h) {
     restore_exception_handler();
 }
-
-echo $a[0];
