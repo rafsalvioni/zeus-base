@@ -2,11 +2,13 @@
 
 namespace ZeusTest\Base;
 
+use PHPUnit\Framework\TestCase;
+
 /**
  * 
  * @author Rafael M. Salvioni
  */
-class PhpTest extends \PHPUnit_Framework_TestCase
+class PhpTest extends TestCase
 {
     /**
      * @test

@@ -10,7 +10,7 @@
  * 
  * @var bool
  */
-\define('SYS_OS_WIN', stripos(PHP_OS, 'win') === 0);
+define('SYS_OS_WIN', stripos(PHP_OS, 'win') === 0);
 /**
  * Reports if OS is derived from Unix.
  * 
@@ -28,13 +28,9 @@ define('SYS_OS_MAC', PHP_EOL == "\r");
  * 
  * @var string
  */
-define('SYS_TEMP_DIR', (
-    function_exists('\\sys_get_temp_dir')
-    ? sys_get_temp_dir()
-    : dirname(\tempnam('', ''))
-) . DIRECTORY_SEPARATOR);
+define('SYS_TEMP_DIR', sys_get_temp_dir() . DIRECTORY_SEPARATOR);
 /**
- * Reports if the processor architeture using little endian order.
+ * Reports if the processor architeture uses little endian order.
  * 
  * @var bool
  */

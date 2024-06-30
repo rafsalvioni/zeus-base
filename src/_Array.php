@@ -10,10 +10,12 @@
  *
  * @param array $array Array
  * @return bool
+ * @deprecated Use PHP's !\array_is_list()
  */
 function array_is_assoc(array $array): bool
 {
-    return array_values($array) !== $array;
+    trigger_error(__FUNCTION__ . "() is deprecated. Use PHP's !array_is_list()", E_USER_DEPRECATED);
+    return !array_is_list($array);
 }
 
 /**

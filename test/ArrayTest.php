@@ -2,25 +2,14 @@
 
 namespace ZeusTest\Base;
 
+use PHPUnit\Framework\TestCase;
+
 /**
  * 
  * @author Rafael M. Salvioni
  */
-class ArrayTest extends \PHPUnit_Framework_TestCase
+class ArrayTest extends TestCase
 {
-    /**
-     * @test
-     */
-    public function arrayAssocTest()
-    {
-        $array = \range(0, 10);
-        $true  = !\array_is_assoc($array);
-        unset($array[3]);
-        $true  = $true && \array_is_assoc($array);
-        $true  = $true && \array_is_assoc($GLOBALS);
-        $this->assertTrue($true);
-    }
-    
     /**
      * @test
      */

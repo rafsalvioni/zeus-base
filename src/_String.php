@@ -34,27 +34,18 @@ function substr_remove(string &$string, int $start, int $length = null): string
  * 
  * To escape a #, use "\".
  * 
- * @param  string $mask
- * @param  string $string
+ * @param string $mask
+ * @param string $string
  * @return string
  */
 function mask(string $mask, string $string): string
 {
-    $string = str_split($string);
-    $return = '';
+    $mask   = str_replace('%', '%%', $mask);
+    $format = preg_replace_callback('/(\\\*)(#)/', function ($m) {
+        $place = (strlen($m[1]) % 2) == 0 ? '%s' : $m[2];
+        return stripslashes($m[1]) . $place;
+    }, $mask);
     
-    while (!empty($mask) && !empty($string) && preg_match('/^(\\\*)(.?)/', $mask, $match)) {
-        $escape = (\strlen($match[1]) % 2) > 0;
-        $part   = '';
-        if (!$escape && $match[2] == '#') {
-            $part = array_shift($string);
-        }
-        else {
-            $part = $match[2];
-        }
-        $part    = stripslashes($match[1]) . $part;
-        $mask    = substr_replace($mask, '', 0, strlen($match[0]));
-        $return .= $part;
-    }
+    $return = sprintf($format, ...str_split($string));
     return $return;
 }

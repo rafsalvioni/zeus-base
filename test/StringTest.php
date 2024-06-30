@@ -2,11 +2,13 @@
 
 namespace ZeusTest\Base;
 
+use PHPUnit\Framework\TestCase;
+
 /**
  * 
  * @author Rafael M. Salvioni
  */
-class StringTest extends \PHPUnit_Framework_TestCase
+class StringTest extends TestCase
 {
     /**
      * @test
@@ -37,8 +39,9 @@ class StringTest extends \PHPUnit_Framework_TestCase
      */
     public function maskTest()
     {
-        $this->assertEquals(mask('###.###.###-##', '12345678900'), '123.456.789-00');
-        $this->assertEquals(mask('###.###.##\##-##', '12345678900'), '123.456.78#9-00');
-        $this->assertEquals(mask('##.###.###-##', '12345678900'), '12.345.678-90');
+        $this->assertEquals('123.456.789-00', mask('###.###.###-##', '12345678900'));
+        $this->assertEquals('123.456.78#9-00', mask('###.###.##\##-##', '12345678900'));
+        $this->assertEquals('12.345.678-90', mask('##.###.###-##', '12345678900'));
+        $this->assertEquals('(11)98764-0987', mask('(##)#####-####', '11987640987'));
     }
 }

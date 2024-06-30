@@ -6,6 +6,22 @@
  */
 
 /**
+ * Returns first non-null argument given
+ * 
+ * @param mixed[...] $value Value
+ * @return ?mixed
+ */
+function coalesce(...$values)
+{
+    foreach ($values as &$v) {
+        if (!is_null($v)) {
+            return $v;
+        }
+    }
+    return null;
+}
+
+/**
  * Dumps a value and return it string.
  *
  * @param mixed $value
@@ -19,7 +35,9 @@ function dump($value): string
 }
 
 /**
- * Checks is a value is a number, integer or double.
+ * Checks is a value is a number (int or float).
+ * 
+ * Returns false to numeric strings
  * 
  * @param mixed $var
  * @return bool
@@ -35,7 +53,7 @@ function is_number($var): bool
  * @param string $class Class name
  * @return object
  */
-function create_instance(string $class)
+function create_instance(string $class): object
 {
     return unserialize(
         sprintf(
