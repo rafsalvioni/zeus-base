@@ -112,8 +112,12 @@ function interpolate(float $x1, float $y1, float $x2, float $y2, float $x): floa
         case $x2:
             return $y2;
         default:
-            $d = ($y2 - $y1) / ($x2 - $x1);
-            $y = is_finite($d) ? $y1 + ($x - $x1) * $d : $y1;
+            try {
+                $d = ($y2 - $y1) / ($x2 - $x1);
+                $y = $y1 + ($x - $x1) * $d;
+            } catch (\DivisionByZeroError $ex) {
+                $y = $y1;
+            }
             return $y;
     }
 }
