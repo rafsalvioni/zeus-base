@@ -60,7 +60,24 @@ function get_precision(int|float $num): int
  */
 function is_multiple(int|float $num, int $base): bool
 {
-    return ($num % $base) == 0;
+    return \fmod($num, $base) == 0;
+}
+
+/**
+ * Check if a number is between 2 others
+ * 
+ * @param float|int $num Num tested
+ * @param float|int $min Min num
+ * @param float|int $max Max num
+ * @param bool $inclusive Is inclusive?
+ * @return bool
+ */
+function is_between(float|int $num, float|int $min, float|int $max, bool $inclusive = true): bool
+{
+    if ($inclusive) {
+        return $num >= $min && $num <= $max;
+    }
+    return $num > $min && $num < $max;
 }
 
 /**
@@ -112,12 +129,8 @@ function interpolate(float $x1, float $y1, float $x2, float $y2, float $x): floa
         case $x2:
             return $y2;
         default:
-            try {
-                $d = ($y2 - $y1) / ($x2 - $x1);
-                $y = $y1 + ($x - $x1) * $d;
-            } catch (\DivisionByZeroError $ex) {
-                $y = $y1;
-            }
+            $d = \fdiv($y2 - $y1, $x2 - $x1);
+            $y = \is_finite($d) ? $y1 + ($x - $x1) * $d : $y1;
             return $y;
     }
 }

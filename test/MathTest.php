@@ -88,7 +88,10 @@ class MathTest extends TestCase
      */
     public function interpolateTest()
     {
+        $this->assertEquals(9, interpolate(6, 9, 8, 12, 6));
+        $this->assertEquals(12, interpolate(6, 9, 8, 12, 8));
         $this->assertEquals(7.5, interpolate(6, 9, 8, 12, 5));
+        $this->assertEquals(9, interpolate(6, 9, 6, 12, 5));
     }
     
     /**
@@ -113,5 +116,25 @@ class MathTest extends TestCase
         }, 1);
         
         $this->assertEquals($edge, \round($test));
+    }
+    
+    /**
+     * @test
+     */
+    public function isBetweenTest()
+    {
+        $this->assertTrue(is_between(5, 1, 10));
+        
+        $this->assertTrue(is_between(1, 1, 10));
+        $this->assertTrue(is_between(10, 1, 10));
+        
+        $this->assertFalse(is_between(1, 1, 10, false));
+        $this->assertFalse(is_between(10, 1, 10, false));
+        
+        $this->assertFalse(is_between(0, 1, 10));
+        $this->assertFalse(is_between(11, 1, 10));
+        
+        $this->assertFalse(is_between(1, 10, 1));
+        $this->assertFalse(is_between(10, 10, 1));
     }
 }
