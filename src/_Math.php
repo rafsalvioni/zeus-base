@@ -168,8 +168,10 @@ function avgw(float|int ...$values): float
 }
 
 /**
- * Searchs the limit value in a range where given condition changes
- * from false to true
+ * Searchs, using binary search, the greatest value that satisfies
+ * given function.
+ * 
+ * If no value satisfies, returns $min - 1
  * 
  * $test should returns a boolean, where:
  * o true:  Test continues with greatest values
@@ -178,20 +180,20 @@ function avgw(float|int ...$values): float
  * @param int $min Min value
  * @param int $max Max value
  * @param \Closure $test Function to test
- * @param int $p Precision
  * @return int
  */
-function limit_test(int $min, int $max, \Closure $test, int $p = 0): float
+function limit_test(int $min, int $max, \Closure $test): int
 {
-    $b = pow(10, -$p);
-    while ($min < $max) {
-        $mid = round(avg($min, $max), $p);
+    $res = $min - 1;
+    while ($min <= $max) {
+        $mid = (int)avg($min, $max);
         if ($test($mid)) {
-            $min = $mid + $b;
+            $res = $mid;
+            $min = $mid + 1;
         }
         else {
-            $max = $mid - $b;
+            $max = $mid - 1;
         }
     }
-    return $min;
+    return $res;
 }
