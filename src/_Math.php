@@ -177,13 +177,24 @@ function avgw(float|int ...$values): float
  * o true:  Test continues with greatest values
  * o false: Test continues with lowest values
  * 
- * @param int $min Min value
- * @param int $max Max value
+ * $max can be null. In this case, it will be defined testing values with $test
+ * using exponecial search (ie 1, 2, 4, 8, 16...). For this, more iterations
+ * its necessary. So, is better to given a pre calculated value when possible.
+ * 
  * @param \Closure $test Function to test
+ * @param int $min Min value
+ * @param int|null $max Max value If null, will be defined
  * @return int
  */
-function limit_test(int $min, int $max, \Closure $test): int
+function limit_test(\Closure $test, int $min = 0, ?int $max = null): int
 {
+    if ($max === null) { // Max doenst given?
+        $max = \max(1, $min + 1);
+        while ($test($max)) {
+            $max *= 2;
+        }
+    }
+    
     $res = $min - 1;
     while ($min <= $max) {
         $mid = (int)avg($min, $max);

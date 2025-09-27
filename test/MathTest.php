@@ -111,14 +111,25 @@ class MathTest extends TestCase
         $min  = -10;
         $max  = 100;
         $edge = random_int($min, $max);
-        $test = limit_test($min, $max, function ($test) use ($edge) {
+        $test = limit_test(function ($test) use ($edge) {
             return $test <= $edge;
-        });
+        }, $min, $max);
         $this->assertEquals($edge, $test);
-        $test2 = limit_test($min, $max, function ($test) use ($edge) {
+        
+        $test2 = limit_test(function ($test) use ($edge) {
             return $test > 1000;
-        });
+        }, $min, $max);
         $this->assertEquals($min - 1, $test2);
+        
+        $test3 = limit_test(function ($test) {
+            return $test <= 256;
+        });
+        $this->assertEquals(256, $test3);
+        
+        $test4 = limit_test(function ($test) {
+            return $test <= 256;
+        }, -1);
+        $this->assertEquals(256, $test4);
     }
     
     /**
