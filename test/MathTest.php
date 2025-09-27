@@ -63,15 +63,14 @@ class MathTest extends TestCase
      */
     public function maybeTest()
     {
-        $this->assertTrue(maybe(1));
-        $this->assertTrue(maybe(1.01));
+        $this->assertTrue(maybe(100));
+        $this->assertTrue(maybe(101));
         $this->assertFalse(maybe(0));
-        $this->assertFalse(maybe(-0.2));
+        $this->assertFalse(maybe(-20));
         
         $count = 0;
         $tests = 100;
-        $prob  = .357;
-        $test  = intval($tests * $prob);
+        $prob  = mt_rand(1, 99);
         
         for ($i = 0; $i < $tests; $i++) {
             if (maybe($prob)) {
@@ -79,8 +78,8 @@ class MathTest extends TestCase
             }
         }
         
-        $min = $test * .7;
-        $this->assertTrue($count >= $min, "$count / $test");
+        $min = $prob * .75;
+        $this->assertTrue($count >= $min, "$count / $prob");
     }
     
     /**

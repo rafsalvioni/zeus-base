@@ -84,29 +84,25 @@ function is_between(float|int $num, float|int $min, float|int $max, bool $inclus
  * Does a random decision using given propability factor
  * 
  * Examples:
- * - maybe(0.1) => ~1 true each 10 function calls
- * - maybe(0.8) => ~8 true each 10 function calls
- * - maybe(0.554) => ~554 true each 1000 function calls
- * - maybe(>=1) => Always true
- * - maybe(<=0) => Always false
+ * - maybe(10)    => ~1 true each 10 function calls
+ * - maybe(80)    => ~8 true each 10 function calls
+ * - maybe(>=100) => Always true
+ * - maybe(<=0)   => Always false
  * 
- * @param float $prob Probability factor
+ * @param int $prob Probability factor
  * @return bool
  */
-function maybe(float $prob = 0.1): bool
+function maybe(int $prob = 10): bool
 {
-    if ($prob >= 1) {
+    if ($prob >= 100) {
         $bool = true;
     }
     else if ($prob <= 0) {
         $bool = false;
     }
     else {
-        $n     = get_precision($prob);
-        $max   = pow(10, $n);
-        $prob *= $max;
-        $rand  = mt_rand(1, $max);
-        $bool  = $rand <= $prob;
+        $rand = mt_rand(1, 100);
+        $bool = $rand <= $prob;
     }
     return $bool;
 }
