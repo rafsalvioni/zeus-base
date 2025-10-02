@@ -6,7 +6,7 @@ namespace ZeusTest\Base;
  * 
  * @author Rafael M. Salvioni
  */
-class ArrayTest extends \PHPUnit_Framework_TestCase
+class ArrayTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @test

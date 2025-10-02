@@ -6,7 +6,7 @@ namespace ZeusTest\Base;
  * 
  * @author Rafael M. Salvioni
  */
-class StringTest extends \PHPUnit_Framework_TestCase
+class StringTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @test
