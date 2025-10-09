@@ -44,4 +44,16 @@ class StringTest extends TestCase
         $this->assertEquals('12.345.678-90', mask('##.###.###-##', '12345678900'));
         $this->assertEquals('(11)98764-0987', mask('(##)#####-####', '11987640987'));
     }
+    
+    /**
+     * @test
+     */
+    public function strPuCsvTest()
+    {
+        $line   = 'Campo1,Campo2,"Campo3,","Campo4\"",Campo5,';
+        $fields = \str_getcsv($line);
+        $csv    = \trim(\str_putcsv($fields));
+        $this->assertEquals(6, \count($fields));
+        $this->assertEquals($line, $csv);
+    }
 }

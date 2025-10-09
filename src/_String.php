@@ -49,3 +49,29 @@ function mask(string $mask, string $string): string
     $return = sprintf($format, ...str_split($string));
     return $return;
 }
+
+/**
+ * Creates a CSV line and return it
+ * 
+ * Does the inverse of PHP's function \str_getcsv().
+ * 
+ * This function uses \fputcsv() into a memory stream and returns its contents
+ * (the result line)
+ * 
+ * @param array $fields
+ * @param string $separator
+ * @param string $enclosure
+ * @param string $escape
+ * @return string
+ */
+function str_putcsv(
+    array $fields, string $separator = ',', string $enclosure = '"',
+    string $escape = '\\', string $eol = \PHP_EOL
+): string {
+    $fp = \fopen('php://memory', 'r+');
+    \fputcsv($fp, $fields, $separator, $enclosure, $escape, $eol);
+    \rewind($fp);
+    $str = \stream_get_contents($fp);
+    \fclose($fp);
+    return $str;
+}
