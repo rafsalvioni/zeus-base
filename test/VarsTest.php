@@ -60,4 +60,18 @@ class VarsTest extends TestCase
         $instance = create_instance($class);
         $this->assertTrue($instance instanceof self);
     }
+    
+    /**
+     * @test
+     */
+    public function gettypeoTest()
+    {
+        $this->assertEquals('boolean', gettypeo(true));
+        $this->assertEquals('boolean', gettypeo(false));
+        $this->assertEquals('integer', gettypeo(65));
+        $this->assertEquals('double', gettypeo(65.98));
+        $this->assertEquals('string', gettypeo('sgsdg'));
+        $this->assertEquals('resource', gettypeo(STDIN));
+        $this->assertEquals('object:' . __CLASS__, gettypeo($this));
+    }
 }

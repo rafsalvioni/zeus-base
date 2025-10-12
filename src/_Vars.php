@@ -63,3 +63,16 @@ function create_instance(string $class): object
         )
     );
 }
+
+/**
+ * Like PHP's gettype(), but, for objects, returns a string "object:CLASS"
+ * 
+ * @param mixed $value
+ * @return string
+ */
+function gettypeo(mixed $value): string
+{
+    return is_object($value)
+        ? sprintf("object:%s", get_class($value))
+        : gettype($value);
+}
